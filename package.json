@@ -1,0 +1,21 @@
+{
+  "name": "oculus-deals-spider-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "start-production": "NODE_ENV=production node src/index.js"
+  },
+  "keywords": [],
+  "author": "Sergey G",
+  "license": "MIT",
+  "dependencies": {
+    "config": "^3.3.3",
+    "nedb": "^1.8.0",
+    "node-telegram-bot-api": "0.51.0",
+    "settings-store": "^1.4.1"
+  },
+  "type": "module"
+}
