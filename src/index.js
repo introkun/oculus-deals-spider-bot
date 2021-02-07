@@ -26,6 +26,9 @@ const docToString = (doc) => {
 
   result += `(_${doc.priceCurrency}${doc.price}_ ➡ _${doc.salePriceCurrency}${doc.salePrice}_)`
 
+  if (doc.url)
+    result += `\n${doc.url}`
+
   return result
 }
 
@@ -34,7 +37,7 @@ const dbLastCheckTime = settings.value("dbLastCheckTime", 0)
 console.log(`dbLastCheckTime is ${dbLastCheckTime}`)
 db.find({
   createdAt: {
-    $gte: (new Date(dbLastCheckTime)).toISOString()
+    $gte: "2021-02-07T10:31:00.071Z"//(new Date(dbLastCheckTime)).toISOString()
   } }, function (err, docs) {
   if (err) {
     console.log(`Error selecting from DB: ${err}`)
