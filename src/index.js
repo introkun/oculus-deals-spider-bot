@@ -22,7 +22,9 @@ console.log('Initialising DB...')
 let db = new Datastore({filename: dbPath, autoload: true, timestampData: true})
 
 const docToString = (doc) => {
-  const result = `*${doc.name}* \`-${doc.discountPercent}%\``
+  let result = `*${doc.name}* \`-${doc.discountPercent}%\` `
+
+  result += `(_${doc.priceCurrency}${doc.price}_ ➡ _${doc.salePriceCurrency}${doc.salePrice}_)`
 
   return result
 }
@@ -45,6 +47,6 @@ db.find({
   console.log('Sending messages to Telegram channel...')
   docs.forEach(doc => {
     console.log(doc)
-    bot.sendMessage(telegramChannel, docToString(doc), {parse_mode: 'markdown'})
+    bot.sendMessage(telegramChannel, '📉 ' + docToString(doc), {parse_mode: 'markdown'})
   })
 })
