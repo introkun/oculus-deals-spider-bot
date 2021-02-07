@@ -37,7 +37,7 @@ const dbLastCheckTime = settings.value("dbLastCheckTime", 0)
 console.log(`dbLastCheckTime is ${dbLastCheckTime}`)
 db.find({
   createdAt: {
-    $gte: "2021-02-07T10:31:00.071Z"//(new Date(dbLastCheckTime)).toISOString()
+    $gte: (new Date(dbLastCheckTime)).toISOString()
   } }, function (err, docs) {
   if (err) {
     console.log(`Error selecting from DB: ${err}`)
