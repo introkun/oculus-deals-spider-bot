@@ -1,7 +1,8 @@
-import TelegramBot from 'node-telegram-bot-api'
 import Datastore from 'nedb'
 import config from 'config'
 import settings from "settings-store"
+import Messenger from './messenger.js'
+import DealsItem from './models/dealsItem.js'
 
 console.log('Initialising settings...')
 const settingsOpts = {
@@ -11,26 +12,14 @@ const settingsOpts = {
 }
 settings.init(settingsOpts)
 
-const token = config.get('TelegramToken')
-const telegramChannel = config.get('TelegramChannel')
 const dbPath = config.get('DbPath')
-
-console.log('Initialising bot API...')
-const bot = new TelegramBot(token, {polling: false})
 
 console.log('Initialising DB...')
 let db = new Datastore({filename: dbPath, autoload: true, timestampData: true})
 
-const docToString = (doc) => {
-  let result = `*${doc.name}* \`-${doc.discountPercent}%\` `
-
-  result += `(_${doc.priceCurrency}${doc.price}_ ➡ _${doc.salePriceCurrency}${doc.salePrice}_)`
-
-  if (doc.url)
-    result += `\n${doc.url}`
-
-  return result
-}
+const token = config.get('TelegramToken')
+const telegramChannel = config.get('TelegramChannel')
+let messenger = new Messenger(token, telegramChannel)
 
 console.log('Looking for deals in DB...')
 const dbLastCheckTime = settings.value("dbLastCheckTime", 0)
@@ -50,6 +39,6 @@ db.find({
   console.log('Sending messages to Telegram channel...')
   docs.forEach(doc => {
     console.log(doc)
-    bot.sendMessage(telegramChannel, '📉 ' + docToString(doc), {parse_mode: 'markdown'})
+    messenger.sendMessage('📉 ' + new DealsItem(doc))
   })
 })
