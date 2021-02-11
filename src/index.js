@@ -15,7 +15,7 @@ settings.init(settingsOpts)
 const dbPath = config.get('DbPath')
 
 console.log('Initialising DB...')
-let db = new Datastore({filename: dbPath, autoload: true, timestampData: true})
+let db = new Datastore({filename: dbPath, autoload: true})
 
 const token = config.get('TelegramToken')
 const telegramChannel = config.get('TelegramChannel')
@@ -39,6 +39,6 @@ db.find({
   console.log('Sending messages to Telegram channel...')
   docs.forEach(doc => {
     console.log(doc)
-    messenger.sendMessage('📉 ' + new DealsItem(doc))
+    messenger.sendMessage('📉 ' + new DealsItem(doc, ["deal", "oculus"]))
   })
 })

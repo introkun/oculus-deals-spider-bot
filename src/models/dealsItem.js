@@ -1,6 +1,7 @@
 class DealsItem {
-    constructor(dbItem) {
+    constructor(dbItem, tags=[]) {
         this.doc = dbItem
+        this.tags = tags
     }
 
     toString() {
@@ -9,8 +10,11 @@ class DealsItem {
         result += `(_${this.doc.priceCurrency}${this.doc.price}_ ➡ ` +
             `_${this.doc.salePriceCurrency}${this.doc.salePrice}_)`
 
+        if (this.tags && this.tags.length > 0)
+            result += ` ${this.tags.map(el => "#" + el).join(" ")}`
+
         if (this.doc.url)
-          result += `\n${this.doc.url}`
+            result += `\n${this.doc.url}`
 
         return result
     }
