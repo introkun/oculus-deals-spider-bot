@@ -1,22 +1,24 @@
 import TelegramBot from 'node-telegram-bot-api'
-
-let delaySec = 5
-const delay = interval => {
-    console.log(`interval = ${interval}`)
-    return new Promise(resolve => setTimeout(resolve, interval))
-}
+import ConsoleLogger from './consoleLogger.js'
 
 class Messenger {
     constructor(token, channel) {
-        console.log('Initialising bot API...')
+        ConsoleLogger.log('Initialising bot API...')
         this.channel = channel
         this.bot = new TelegramBot(token, {polling: false})
     }
 
-    async sendMessage(message) {
-        await delay(delaySec * 1000)
-        delaySec += 10
-        this.bot.sendMessage(this.channel, message, {parse_mode: 'markdown'})
+    async sendMessages(messages) {
+        const promises = messages.map((el, index) => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    ConsoleLogger.log(`Sending Telegram message #${index}`)
+                    this.bot.sendMessage(this.channel, el, {parse_mode: 'markdown'}).then(resolve())
+                  }, (index + 1) * 5 * 1000)
+            })
+        })
+
+        Promise.all(promises).then('Bulk message sending finished')
     }
 }
 
