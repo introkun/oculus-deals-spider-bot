@@ -31,7 +31,7 @@ jobs:
             npm ci
 
             echo "Writing config wile"
-            echo ${{secrets.CONFIG}} > config/production.json
+            echo "${{secrets.CONFIG}}" > config/production.json
 
             echo "Renaming current app folder"
             mv $appDir $appDir.$(date +\%Y\%m\%d\%H\%M\%S)
