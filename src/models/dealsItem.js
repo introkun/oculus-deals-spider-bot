@@ -10,6 +10,10 @@ class DealsItem {
         result += `(_${this.doc.priceCurrency}${this.doc.price}_ ➡ ` +
             `_${this.doc.salePriceCurrency}${this.doc.salePrice}_)`
 
+        if (this.doc.endsUtc) {
+            result += ` until ${(new Date(this.doc.endsUtc)).toUTCString()}`
+        }
+
         if (this.tags && this.tags.length > 0)
             result += ` ${this.tags.map(el => "#" + el).join(" ")}`
 
