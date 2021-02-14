@@ -47,7 +47,9 @@ db.find({
     messages.push('📉 ' + new DealsItem(doc, ["deal", "oculus"]))
   })
   if (messages && messages.length > 0) {
-    ConsoleLogger.log(`start singing messages`)
+    ConsoleLogger.log(`start sending messages`)
     messenger.sendMessages(messages)
+  } else {
+    ConsoleLogger.log(`nothing to send`)
   }
 })
