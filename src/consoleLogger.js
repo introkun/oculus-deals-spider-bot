@@ -1,7 +1,7 @@
 class ConsoleLogger {
-    static log(message) {
-        console.log(`${(new Date).toISOString()}: ${message}`)
-    }
+  static log(message) {
+    console.log(`${(new Date).toISOString()}: ${message}`);
+  }
 }
 
-export default ConsoleLogger
+export default ConsoleLogger;
