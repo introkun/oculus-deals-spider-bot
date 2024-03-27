@@ -15,15 +15,15 @@
   "author": "Sergey G",
   "license": "MIT",
   "dependencies": {
-    "config": "^3.3.3",
+    "config": "^3.3.11",
     "nedb": "^1.8.0",
-    "node-telegram-bot-api": "0.51.0",
+    "node-telegram-bot-api": "0.65.1",
     "settings-store": "^1.4.1"
   },
   "type": "module",
   "devDependencies": {
-    "eslint": "^7.20.0",
+    "eslint": "^8.57.0",
     "eslint-config-google": "^0.14.0",
-    "husky": "^5.0.9"
+    "husky": "^9.0.11"
   }
 }
