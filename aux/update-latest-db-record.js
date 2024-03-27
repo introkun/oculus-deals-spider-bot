@@ -1,4 +1,4 @@
-import Datastore from 'nedb';
+import Datastore from '@seald-io/nedb';
 import config from 'config';
 
 const dbPath = config.get('DbPath');

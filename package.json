@@ -15,9 +15,9 @@
   "author": "Sergey G",
   "license": "MIT",
   "dependencies": {
+    "@seald-io/nedb": "^4.0.4",
     "config": "^3.3.11",
     "dotenv": "^16.4.5",
-    "nedb": "^1.8.0",
     "node-telegram-bot-api": "0.65.1",
     "rollbar": "^2.26.4",
     "settings-store": "^1.4.1"

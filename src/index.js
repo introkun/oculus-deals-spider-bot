@@ -1,4 +1,4 @@
-import Datastore from 'nedb';
+import Datastore from '@seald-io/nedb';
 import config from 'config';
 import settings from 'settings-store';
 import Messenger from './messenger.js';
