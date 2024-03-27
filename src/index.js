@@ -4,6 +4,18 @@ import settings from 'settings-store';
 import Messenger from './messenger.js';
 import DealsItem from './models/dealsItem.js';
 import ConsoleLogger from './consoleLogger.js';
+import Rollbar from 'rollbar';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const ROLLBAR_SERVER_TOKEN = process.env.ROLLBAR_SERVER_TOKEN;
+
+const rollbar = new Rollbar({
+  accessToken: ROLLBAR_SERVER_TOKEN,
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+});
 
 ConsoleLogger.log('Initialising settings...');
 const settingsOpts = {
@@ -30,6 +42,7 @@ db.find({
     $gte: (new Date(dbLastCheckTime)).toISOString(),
   }}, function(err, docs) {
   if (err) {
+    rollbar.error(`Error selecting from DB: ${err}`);
     ConsoleLogger.log(`Error selecting from DB: ${err}`);
     return;
   }
