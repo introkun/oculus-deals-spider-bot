@@ -20,12 +20,17 @@ jobs:
           username: ${{secrets.SSH_USERNAME}}
           
           script: |
+            set -e
+
             appName=oculus-deals-spider-bot
             appDir=/opt/$appName
-            tempDir=$(mktemp -d /opt/oculus-deals-spider-bot.XXXXXXXXX)
-            mkdir $tempDir
+            tempDir=$(mktemp -d /tmp/oculus-deals-spider-bot.XXXXXXXXX)
+
+            rm -rf "$tempDir"  # Remove existing temp directory if it exists
+            mkdir -p "$tempDir"  # Recreate temp directory
+
             cd $tempDir
-            git clone git@github.com:introkun/oculus-deals-spider-bot.git .
+            git clone https://github.com/introkun/oculus-deals-spider-bot.git .
 
             echo "Installing app dependencies"
             npm ci
